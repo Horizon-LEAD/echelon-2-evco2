@@ -1,0 +1,132 @@
+{
+    "name": "Echelon-2-EVCO2",
+    "description":"Echelon-2-EVCO2 accepts the output of Echelon model and together with more input data creates the XLSX outputs compatible with EVCO2",
+    "version": "latest-e2",
+    "status":"draft",
+    "dockerImage":"registry.gitlab.com/inlecom/lead/models/echelon-2-evco2:latest-e2c1",
+    "url": "https://gitlab.com/inlecom/lead/models/echelon-2-evco2",
+    "modelData":  [
+        {
+            "name": "Echelon Output JSON",
+            "variableName": "echelon_json",
+            "description": "JSON Input matching Echelon's model output",
+            "isOutput": false,
+            "isOutputDir": false,
+            "isOptional": false,
+            "inputType": "CLI",
+            "chartType": "NONE",
+            "modelDataType": {
+                "name": "file",
+                "description": "",
+                "dataType": "file",
+                "extension": "json",
+                "validators": [
+                    {
+                        "name": "required",
+                        "description": "required",
+                        "validatorType": "required",
+                        "value": ""
+                    }
+                ],
+                "objectKeys": []
+            }
+        },
+        {
+            "name": "Vehicles JSON",
+            "variableName": "vehicles_json",
+            "description": "JSON describing vehicles.",
+            "isOutput": false,
+            "isOptional": false,
+            "chartType": "NONE",
+            "modelDataType": {
+                "name": "file",
+                "description": "",
+                "dataType": "file",
+                "extension": "json",
+                "validators": [],
+                "objectKeys": []
+            }
+        },
+        {
+            "name": "Climate JSON",
+            "variableName": "climate_json",
+            "description": "JSON describing climate.",
+            "isOutput": false,
+            "isOptional": false,
+            "chartType": "NONE",
+            "modelDataType": {
+                "name": "file",
+                "description": "",
+                "dataType": "file",
+                "extension": "json",
+                "validators": [],
+                "objectKeys": []
+            }
+        },
+        {
+            "name": "Year",
+            "variableName": "year",
+            "description": "Year to be used for Copert input",
+            "isOutput": false,
+            "isOptional": false,
+            "chartType": "NONE",
+            "modelDataType": {
+                "name": "number",
+                "description": "number",
+                "dataType": "number",
+                "extension": null,
+                "validators": [],
+                "objectKeys": []
+            }
+        },
+        {
+            "name": "OUTDIR",
+            "variableName": "outdir",
+            "description": "output directory",
+            "isOutput": false,
+            "isOutputDir": true,
+            "isOptional": false,
+            "inputType": "CLI",
+            "chartType": "NONE",
+            "modelDataType": {
+                "name": "string",
+                "description": "",
+                "dataType": "string",
+                "extension": null,
+                "validators": [
+                    {
+                        "name": "required",
+                        "description": "required",
+                        "validatorType": "required",
+                        "value": ""
+                    }
+                ],
+                "objectKeys": []
+            }
+        },
+        {
+            "name": "xlsx Output",
+            "variableName": "copert_input",
+            "description": "copert input",
+            "isOutput": true,
+            "isOutputDir": false,
+            "isOptional": false,
+            "chartType": "NONE",
+            "modelDataType": {
+                "name": "file",
+                "description": "",
+                "dataType": "file",
+                "extension": "xlsx",
+                "validators": [
+                    {
+                        "name": "required",
+                        "description": "required",
+                        "validatorType": "required",
+                        "value": ""
+                    }
+                ],
+                "objectKeys": []
+            }
+        }
+    ]
+}
