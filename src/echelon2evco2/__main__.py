@@ -15,6 +15,10 @@ LOG_MSG_FMT = "%(asctime)s %(levelname)-8s %(name)s \
 %(filename)s#L%(lineno)d %(message)s"
 LOG_DT_FMT = "%Y-%m-%d %H:%M:%S"
 
+DESC = '''
+Echelon to EVCO2 Connector
+'''
+
 logger = logging.getLogger("echelon_evco2_connector")
 
 class RawDefaultsHelpFormatter(ArgumentDefaultsHelpFormatter, RawTextHelpFormatter):
@@ -40,7 +44,7 @@ def strdir(path):
 def main():
     """ echelon2copert interface main
     """
-    parser = ArgumentParser(description=__doc__,
+    parser = ArgumentParser(description=DESC,
                             formatter_class=RawDefaultsHelpFormatter)
 
     parser.add_argument('-v', '--verbosity', action='count',
@@ -60,8 +64,8 @@ def main():
     df = pd.concat([df_echelon, df_vehicle_info], axis=1)
     df.rename(columns = {'totalDistance':'MeanActivity', 'numberOfVehicles':'Stock'}, inplace = True)
     df['ResponsePlanId'] = np.random.randint(1, 1000, df.shape[0])
-    df['energyTJ'] = df.apply(lambda row: (row.VehicleConsumption/100) * row.MeanActivity, axis = 1)
-    df['energykwh'] = df.apply(lambda row: row.energyTJ * pow(3.6, 10^(-6)), axis = 1)
+    df['energykwh'] = df.apply(lambda row: (row.VehicleConsumption/100) * row.MeanActivity, axis = 1)
+    df['energyTJ'] = df.apply(lambda row: row.energykwh * 3.6 * 1e-6, axis = 1)
     df.drop('VehicleConsumption', axis=1, inplace=True)
     df.to_excel(join(args.OUTDIR, "energy_consumption.xlsx"), index=False)
 

@@ -22,17 +22,20 @@ docker build -t echelon-2-evco2:latest .
 The executable's help message provides information on the parameters that are needed.
 ```
 
-ECHELON-2-EVCO2
+$ echelon-2-evco2 -h
 
-Translates the data retrieved from the Echelon model into the format accepted by the EVCO2 model.
+usage: echelon-2-evco2 [-h] [-v] Echelon_Output_IN Vehicle_info_IN OUTDIR
+
+Main module
 
 positional arguments:
-  Echelon_Output_IN         The csv output file from Echelon as input to the connector
-  Vehicle_info_IN           Vehicle json file containing information regarding vehicle
-  OUTDIR                    The output directory
+  Echelon_Output_IN  The Json output file from Echelon as input to the connector
+  Vehicle_info_IN    Vehicle json containing information regarding vehicle type
+  OUTDIR             The output directory
 
 options:
   -h, --help         show this help message and exit
+  -v, --verbosity    Increase output verbosity (default: 0)
 ```
 
 If the package installation has been omitted, the model can of course also be run with

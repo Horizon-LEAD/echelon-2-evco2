@@ -1,9 +1,9 @@
 {
     "name": "Echelon-2-EVCO2",
     "description":"Echelon-2-EVCO2 accepts the output of Echelon model and together with more input data creates the XLSX outputs compatible with EVCO2",
-    "version": "latest-e2",
+    "version": "latest-e1",
     "status":"draft",
-    "dockerImage":"registry.gitlab.com/inlecom/lead/models/echelon-2-evco2:latest-e2evco2",
+    "dockerImage":"registry.gitlab.com/inlecom/lead/models/echelon-2-evco2:latest-e1",
     "url": "https://gitlab.com/inlecom/lead/models/echelon-2-evco2",
     "modelData":  [
         {
@@ -36,6 +36,7 @@
             "variableName": "Vehicle_info_IN",
             "description": "Vehicle json file containing information regarding vehicle",
             "isOutput": false,
+            "isOutputDir": false,
             "isOptional": false,
             "chartType": "NONE",
             "modelDataType": {
