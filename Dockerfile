@@ -1,12 +1,16 @@
-FROM python:3.9.10-alpine3.15 as build-image
+FROM python:3.10-slim-bullseye
 
-COPY requirements.txt setup.py README.md /srv/app/
+RUN apt-get update && \
+   apt-get install -y --no-install-recommends \
+       liblapack-dev libatlas-base-dev && \
+   rm -rf /var/lib/apt/lists/*
 
-RUN apk add --update --no-cache git \
-    && pip install --upgrade pip \
-    && pip install -r /srv/app/requirements.txt
+COPY setup.py requirements.txt README.md /srv/app/
+
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r /srv/app/requirements.txt
 
 COPY src /srv/app/src
-RUN pip install /srv/app/
+RUN pip install --no-cache-dir /srv/app/
 
-ENTRYPOINT [ "echelon-2-evco2", "-vvv" ]
+ENTRYPOINT [ "echelon-2-evco2" ]

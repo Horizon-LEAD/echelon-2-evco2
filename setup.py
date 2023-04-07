@@ -36,7 +36,10 @@ setup(
     python_requires='>=3.6, <4',
     install_requires=[
         'python-dotenv',
-        'XlsxWriter'
+        'XlsxWriter',
+        'pandas',
+        'openpyxl',
+        'numpy',
     ],
     entry_points={
         'console_scripts': [
