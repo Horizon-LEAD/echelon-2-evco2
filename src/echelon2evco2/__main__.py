@@ -2,13 +2,13 @@
 """
 
 import logging
-from os.path import isfile, isdir
-import pandas as pd
-import numpy as np
+from os.path import isfile, isdir, join
 from sys import argv
-from os.path import join
 from argparse import (ArgumentParser, RawTextHelpFormatter,
                       ArgumentDefaultsHelpFormatter, ArgumentTypeError)
+
+from numpy.random import randint
+import pandas as pd
 
 LOG_FILE_MAX_BYTES = 50e6
 LOG_MSG_FMT = "%(asctime)s %(levelname)-8s %(name)s \
@@ -61,13 +61,19 @@ def main():
     df_echelon = pd.read_csv(args.Echelon_Output_IN, sep=';')
     df_echelon = df_echelon[['totalDistance', 'numberOfVehicles']].iloc[:1]
     df_vehicle_info = pd.read_json(args.Vehicle_info_IN).iloc[:1]
-    df = pd.concat([df_echelon, df_vehicle_info], axis=1)
-    df.rename(columns = {'totalDistance':'MeanActivity', 'numberOfVehicles':'Stock'}, inplace = True)
-    df['ResponsePlanId'] = np.random.randint(1, 1000, df.shape[0])
-    df['energykwh'] = df.apply(lambda row: (row.VehicleConsumption/100) * row.MeanActivity, axis = 1)
-    df['energyTJ'] = df.apply(lambda row: row.energykwh * 3.6 * 1e-6, axis = 1)
-    df.drop('VehicleConsumption', axis=1, inplace=True)
-    df.to_excel(join(args.OUTDIR, "energy_consumption.xlsx"), index=False)
+
+    d_f = pd.concat([df_echelon, df_vehicle_info], axis=1)
+    d_f.rename(columns={'totalDistance': 'MeanActivity',
+                        'numberOfVehicles': 'Stock'},
+               inplace=True)
+    d_f['ResponsePlanId'] = randint(1, 1000, d_f.shape[0])
+    d_f['energykwh'] = d_f.apply(
+        lambda row: (row.VehicleConsumption/100) * row.MeanActivity,
+        axis=1
+    )
+    d_f['energyTJ'] = d_f.apply(lambda row: row.energykwh * 3.6 * 1e-6, axis=1)
+    d_f.drop('VehicleConsumption', axis=1, inplace=True)
+    d_f.to_excel(join(args.OUTDIR, "energy_consumption.xlsx"), index=False)
 
 
 if __name__ == '__main__':

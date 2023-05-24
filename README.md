@@ -51,9 +51,9 @@ echelon-2-evco2 \
 
 ```
 docker run --rm \
-    -v ${PWD}/sample-data:/data \
+    -v ./sample-data:/data \
     echelon-2-evco2:latest \
-    /data/input/output-csv.csv \
+    /data/input/output.csv \
     /data/input/vehicle_info.json \
     /data/output/
 ```
