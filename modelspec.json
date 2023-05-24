@@ -38,6 +38,7 @@
             "isOutput": false,
             "isOutputDir": false,
             "isOptional": false,
+            "inputType": "CLI",
             "chartType": "NONE",
             "modelDataType": {
                 "name": "file",
